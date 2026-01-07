@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>写给徐渠的一封表白</title>
+<style>
+/* 页面基础样式 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    color: #4a2c2a;
+    transition: background 5s ease;
+    animation: gradientShift 20s infinite alternate;
+    cursor: default;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background: linear-gradient(135deg, #f8cdda, #fbc2eb); }
+    25% { background: linear-gradient(135deg, #fbc2eb, #fad0c4); }
+    50% { background: linear-gradient(135deg, #fad0c4, #fef9d7); }
+    75% { background: linear-gradient(135deg, #fef9d7, #d4fc79); }
+    100% { background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+}
+
+.container {
+    max-width: 800px;
+    margin: 80px auto;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    line-height: 2;
+    transition: background 2s ease, color 2s ease;
+    position: relative;
+    z-index: 2;
+}
+
+h1 { text-align: center; font-size: 36px; margin-bottom: 40px; }
+p { font-size: 18px; margin: 20px 0; }
+.highlight { color: #c0392b; font-weight: bold; }
+.signature { margin-top: 60px; text-align: right; font-size: 20px; }
+.heart { text-align: center; font-size: 48px; margin-top: 30px; color: #e74c3c; animation: beat 1s infinite alternate; }
+
+@keyframes beat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* 飘落爱心样式 */
+.floating-heart {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #e74c3c;
+    transform: rotate(45deg);
+    top: -10px;
+    z-index: 1;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+.floating-heart::before, .floating-heart::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+.floating-heart::before { top: -5px; left: 0; }
+.floating-heart::after { top: 0; left: -5px; }
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>写给我最爱的你</h1>
+    <p>亲爱的 <span class="highlight">徐渠</span>：</p>
+    <p>转眼之间，我们已经一起走过了 <span class="highlight">12 年</span>。 这 12 年里，有欢笑，也有争吵；有顺境，也有低谷。 但无论世界如何变化，你始终站在我身边。</p>
+    <p>谢谢你，在我迷茫时没有放开我的手； 谢谢你，在我不够成熟的时候依然选择包容； 谢谢你，把最珍贵的时间、耐心和爱，毫无保留地给了我。</p>
+    <p>你不仅是我的夫人， 更是我生命中最重要的伙伴、家人和归宿。</p>
+    <p>未来的路也许依然不会完美， 但我希望你知道—— <span class="highlight">我愿意继续牵着你的手，一年、十年、直到我们都白了头。</span></p>
+    <p>徐渠，谢谢你这 12 年的陪伴。 我爱你，过去如此，现在如此，未来也依然如此。</p>
+    <div class="heart">❤️</div>
+    <div class="signature"> 永远爱你的<br> 立先生 </div>
+</div>
+
+<!-- 背景音乐播放器 -->
+<audio id="bgm" src="music1.mp3" loop></audio>
+
+<script>
+// 飘落爱心
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+    const size = 5 + Math.random() * 10;
+    heart.style.width = heart.style.height = size + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, 6000);
+}
+setInterval(createHeart, 300);
+
+// 触碰或点击页面后播放音乐
+function playBGMOnce() {
+    const bgm = document.getElementById('bgm');
+    bgm.play().catch(err => console.log('播放失败', err));
+    // 移除事件，防止重复触发
+    window.removeEventListener('click', playBGMOnce);
+    window.removeEventListener('touchstart', playBGMOnce);
+}
+
+// 监听用户第一次触碰或点击
+window.addEventListener('click', playBGMOnce);
+window.addEventListener('touchstart', playBGMOnce);
+</script>
+</body>
+</html>
